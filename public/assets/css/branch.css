@@ -1,0 +1,109 @@
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial;
+    background-image:url('../images/backgrounds/branch-bg.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:95%;
+    margin:auto;
+}
+
+.page-title{
+    font-size:60px;
+    margin-bottom:30px;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-bottom:20px;
+    padding:12px 20px;
+    background:#7c3aed;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.add-btn{
+    display:inline-block;
+    padding:12px 20px;
+    background:#0f766e;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    padding:18px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+.action-buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn,
+.submit-btn{
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.view-btn{
+    background:#3b82f6;
+}
+
+.edit-btn{
+    background:#f59e0b;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+
+.submit-btn{
+    background:#0f766e;
+}
+
+.update-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.update-form input{
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+.details-box p{
+    font-size:20px;
+}

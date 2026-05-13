@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    padding: 30px;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.45),
+    rgba(0,0,0,0.45)),
+    url("../images/backgrounds/analytics-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.back-btn{
+    display: inline-block;
+    padding: 12px 22px;
+    background: #7c3aed;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.back-btn:hover{
+    background: #5b21b6;
+    transform: translateY(-2px);
+}
+
+.analytics-container{
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+
+    background: rgba(255,255,255,0.95);
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.page-title{
+    font-size: 55px;
+    color: #111827;
+    margin-bottom: 40px;
+}
+
+.card-grid{
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+}
+
+.analytics-card{
+    padding: 30px;
+    border-radius: 20px;
+    color: white;
+
+    box-shadow:
+    0 6px 18px rgba(0,0,0,0.2);
+
+    transition: 0.3s;
+}
+
+.analytics-card:hover{
+    transform: translateY(-5px);
+}
+
+.analytics-card h2{
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.analytics-card p{
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+.blue{
+    background:
+    linear-gradient(135deg,#3b82f6,#1d4ed8);
+}
+
+.green{
+    background:
+    linear-gradient(135deg,#10b981,#047857);
+}
+
+.orange{
+    background:
+    linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.red{
+    background:
+    linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.purple{
+    background:
+    linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.chart-box{
+    background: #f9fafb;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+    inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.chart-title{
+    font-size: 30px;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+canvas{
+    width: 100% !important;
+    max-height: 450px;
+}
+
+.analytics-link{
+    text-decoration: none;
+}
+
+.analytics-link .analytics-card{
+    cursor: pointer;
+}
+
+.analytics-link:hover .analytics-card{
+    transform: translateY(-8px) scale(1.03);
+}

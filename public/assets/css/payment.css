@@ -1,0 +1,104 @@
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial;
+    background-image:url('../images/backgrounds/payment-bg.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    width:90%;
+    margin:auto;
+    margin-top:80px;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.header-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-title{
+    font-size:60px;
+    margin:0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    padding:20px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+.action-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn,
+.add-btn,
+.submit-btn,
+.back-btn{
+    text-decoration:none;
+    color:white;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+}
+
+.view-btn{
+    background:#3b82f6;
+}
+
+.edit-btn{
+    background:#f59e0b;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+
+.add-btn,
+.submit-btn{
+    background:#0f766e;
+}
+
+.back-btn{
+    background:#7c3aed;
+    display:inline-block;
+}
+
+.update-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.update-form input{
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+.details-box p{
+    font-size:20px;
+    margin-bottom:20px;
+}

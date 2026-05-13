@@ -1,0 +1,149 @@
+body{
+    margin:0;
+    padding:30px;
+    font-family:Arial, sans-serif;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.55),
+    rgba(0,0,0,0.55)),
+    url('../images/backgrounds/inspection-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+.page-title{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#222;
+}
+
+.list-container,
+.form-container,
+.details-container{
+    background:#ffffffee;
+    padding:30px;
+    border-radius:24px;
+    backdrop-filter:blur(10px);
+    animation:fadeUp 0.7s ease;
+
+    margin-top:20px;
+}
+
+.list-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.add-button,
+.back-button,
+.submit-btn{
+    background:#7c3aed;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn{
+    padding:8px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+}
+
+.view-btn{
+    background:#2563eb;
+}
+
+.edit-btn{
+    background:#f59e0b;
+}
+
+.delete-btn{
+    background:#dc2626;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #ccc;
+}
+
+.detail-row{
+    margin-bottom:20px;
+}
+
+.label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:6px;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.back-btn{
+    display:inline-block;
+    margin:30px 0 15px 30px;
+    padding:12px 20px;
+    background:#7c3aed;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    position:relative;
+    z-index:999;
+}
+
+.back-btn:hover{
+    background:#6d28d9;
+}
