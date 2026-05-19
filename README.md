@@ -158,7 +158,6 @@ MySQL (XAMPP / Railway)
 
 The system uses foreign key relationships to maintain database integrity.
 
-Examples:
 - A lease cannot reference a non-existent renter
 - Payments cannot exist without valid lease records
 - Records connected to other tables are protected from accidental deletion
@@ -216,7 +215,7 @@ Update your `.env` file:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=dreamhome
+DB_DATABASE=dreamhome_db
 DB_USERNAME=root
 DB_PASSWORD=
 ```
