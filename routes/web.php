@@ -282,10 +282,6 @@ Route::get('/analytics/revenue',
 Route::get('/analytics/branch',
 [AnalyticController::class, 'branch']);
 
-
-Route::get('/reports',
-[ReportController::class, 'index']);
-
 Route::get('/reports/lease',
 [ReportController::class, 'lease']);
 
@@ -300,6 +296,5 @@ Route::get('/reports/renter',
 
 Route::get('/reports/staff',
 [ReportController::class, 'staff']);
-
 
 

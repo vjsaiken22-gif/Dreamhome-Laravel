@@ -96,23 +96,23 @@
             </li>
 
             <li>
-                <a href="/property">📊 Property</a>
+                <a href="/reports/property">Property Report</a>
             </li>
 
             <li>
-                <a href="/renters">📋 Renters</a>
+                <a href="/reports/renter">Renter Report</a>
             </li>
 
             <li>
-                <a href="/staff">🧾 Staff</a>
+                <a href="/reports/staff">Staff Report</a>
             </li>
 
             <li>
-                <a href="/lease">📑 Lease</a>
+                <a href="/reports/lease">Lease Report</a>
             </li>
 
             <li>
-                <a href="/payments">💳 Payments</a>
+                <a href="/reports/payment">Payment Report</a>
             </li>
 
             @endif
