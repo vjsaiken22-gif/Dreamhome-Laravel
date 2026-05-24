@@ -19,7 +19,7 @@
 
     <div class="page-header">
 
-        <h1>Lease List</h1>
+        <h1>Lease Management</h1>
 
         <a href="/leases/create" class="add-btn">
             + Add Lease
