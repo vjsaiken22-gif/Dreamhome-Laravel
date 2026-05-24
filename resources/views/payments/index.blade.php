@@ -23,7 +23,7 @@
     <div class="header-section">
 
         <h1 class="page-title">
-            Payments
+            Payment Management
         </h1>
 
         <a href="/payments/create"
