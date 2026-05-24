@@ -23,7 +23,7 @@
     <div class="page-header">
 
         <h1 class="page-title">
-            Renter List
+            Renter Management
         </h1>
 
         <a href="/renters/create" class="add-btn">
