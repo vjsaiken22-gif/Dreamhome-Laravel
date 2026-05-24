@@ -26,7 +26,7 @@
 
     <div class="page-header">
 
-        <h1>Property List</h1>
+        <h1>Property Management</h1>
 
         @if($role == 'Admin')
 
