@@ -4,7 +4,7 @@
 <head>
 
 <title>
-    Branch List
+    Branch Management
 </title>
 
 <link rel="stylesheet"
