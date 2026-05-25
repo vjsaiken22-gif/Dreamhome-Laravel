@@ -21,7 +21,7 @@
 <div class="container">
 
 <h1 class="page-title">
-    Property Owners
+    Property Owner Management
 </h1>
 
 <a href="/owners/create"

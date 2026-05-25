@@ -24,7 +24,7 @@ class="back-btn">
 <div class="container">
 
 <h1 class="page-title">
-    Branches
+    Branche Management
 </h1>
 
 <a href="/branches/create"
