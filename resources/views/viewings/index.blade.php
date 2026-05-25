@@ -15,7 +15,7 @@
 <div class="top-bar">
 
     <h1 class="page-title">
-        Viewing List
+        Viewing Management
     </h1>
 
     <div style="display:flex; gap:15px;">
