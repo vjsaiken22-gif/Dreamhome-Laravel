@@ -8,7 +8,7 @@
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
 
-    <title>Inspection Management</title>
+    <title>Inspections</title>
 
     <link rel="stylesheet"
     href="{{ asset('assets/css/inspection.css') }}">
@@ -26,7 +26,7 @@
     <div class="list-header">
 
         <h1 class="page-title">
-            Inspection List
+            Inspection Management
         </h1>
 
         <a href="/inspections/create" class="add-button">
