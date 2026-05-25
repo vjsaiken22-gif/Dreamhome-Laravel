@@ -10,11 +10,11 @@ The project follows the Laravel MVC architecture and uses MySQL as its relationa
 
 # Team Members
 
-| Name                   | Role                                                        |
-|------------------------|-------------------------------------------------------------|
-| Vanley John B. Monares | Project Controller / Reports / Integration                  |
-| Vanessa S. Dajang      | Property Module / Lease Module / Viewing list / Inspections |
-| Allen Literato         | Renter Module  / Payment Module / Owners / Branches         |
+| Name                   | Role                                                                  |
+|------------------------|-----------------------------------------------------------------------|
+| Vanley John B. Monares | Project Controllers / Reports / Integration / Ads / Staff / Analytics |
+| Vanessa S. Dajang      | Property Module / Lease Module / Viewing list / Inspections           |
+| Allen Literato         | Renter Module  / Payment Module / Owners / Branches                   |
 
 ---
 
