@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class ViewingController extends Controller
 {
@@ -40,16 +41,39 @@ class ViewingController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('viewing')->insert([
+        try {
 
-            'property_no' => $request->property_no,
-            'renter_no' => $request->renter_no,
-            'view_date' => $request->view_date,
-            'comments' => $request->comments
+            $exists = DB::table('viewing')
+                ->where('property_no', $request->property_no)
+                ->where('renter_no', $request->renter_no)
+                ->where('view_date', $request->view_date)
+                ->exists();
 
-        ]);
+            if ($exists) {
 
-        return redirect('/viewings');
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Viewing Record detected.');
+
+            }
+
+            DB::table('viewing')->insert([
+
+                'property_no' => $request->property_no,
+                'renter_no' => $request->renter_no,
+                'view_date' => $request->view_date,
+                'comments' => $request->comments
+
+            ]);
+
+            return redirect('/viewings')
+                ->with('success', 'Viewing added successfully.');
+
+        } catch (QueryException $e) {
+
+            throw $e;
+
+        }
 
     }
 
@@ -101,7 +125,8 @@ class ViewingController extends Controller
 
             ]);
 
-        return redirect('/viewings');
+        return redirect('/viewings')
+            ->with('success', 'Viewing updated successfully.');
 
     }
 
@@ -112,7 +137,8 @@ class ViewingController extends Controller
             ->where('viewing_id', $id)
             ->delete();
 
-        return redirect('/viewings');
+        return redirect('/viewings')
+            ->with('success', 'Viewing deleted successfully.');
 
     }
 

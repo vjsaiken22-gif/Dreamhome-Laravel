@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class PropertyController extends Controller
 {
@@ -34,18 +35,35 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('property')->insert([
+        try {
 
-            'property_no' => $request->property_no,
-            'street' => $request->street,
-            'city' => $request->city,
-            'type' => $request->type,
-            'rooms' => $request->rooms,
-            'rent' => $request->rent
+            DB::table('property')->insert([
 
-        ]);
+                'property_no' => $request->property_no,
+                'street' => $request->street,
+                'city' => $request->city,
+                'type' => $request->type,
+                'rooms' => $request->rooms,
+                'rent' => $request->rent
 
-        return redirect('/properties');
+            ]);
+
+            return redirect('/properties')
+                ->with('success', 'Property added successfully.');
+
+        } catch (QueryException $e) {
+
+            if ($e->errorInfo[1] == 1062) {
+
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Property Number detected.');
+
+            }
+
+            throw $e;
+
+        }
 
     }
 
@@ -92,7 +110,8 @@ class PropertyController extends Controller
 
             ]);
 
-        return redirect('/properties');
+        return redirect('/properties')
+            ->with('success', 'Property updated successfully.');
 
     }
 
@@ -103,7 +122,8 @@ class PropertyController extends Controller
             ->where('property_no', $id)
             ->delete();
 
-        return redirect('/properties');
+        return redirect('/properties')
+            ->with('success', 'Property deleted successfully.');
 
     }
 

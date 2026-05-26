@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class OwnerController extends Controller
 {
@@ -34,17 +35,34 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('owner')->insert([
+        try {
 
-            'owner_no' => $request->owner_no,
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-            'address' => $request->address,
-            'telephone' => $request->telephone
+            $exists = DB::table('owner')
+                ->where('owner_no', $request->owner_no)
+                ->exists();
 
-        ]);
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Owner already exists with this Owner No.');
+            }
 
-        return redirect('/owners');
+            DB::table('owner')->insert([
+
+                'owner_no' => $request->owner_no,
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'telephone' => $request->telephone
+
+            ]);
+
+            return redirect('/owners')
+                ->with('success', 'Owner added successfully.');
+
+        } catch (QueryException $e) {
+            throw $e;
+        }
 
     }
 
@@ -90,7 +108,8 @@ class OwnerController extends Controller
 
             ]);
 
-        return redirect('/owners');
+        return redirect('/owners')
+            ->with('success', 'Owner updated successfully.');
 
     }
 
@@ -101,7 +120,8 @@ class OwnerController extends Controller
             ->where('owner_no', $id)
             ->delete();
 
-        return redirect('/owners');
+        return redirect('/owners')
+            ->with('success', 'Owner deleted successfully.');
 
     }
 

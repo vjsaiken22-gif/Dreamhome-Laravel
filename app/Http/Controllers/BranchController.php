@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class BranchController extends Controller
 {
@@ -34,19 +35,40 @@ class BranchController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('branch')->insert([
+        try {
 
-            'branch_no' => $request->branch_no,
-            'street' => $request->street,
-            'area' => $request->area,
-            'city' => $request->city,
-            'postcode' => $request->postcode,
-            'telephone' => $request->telephone,
-            'fax' => $request->fax
+            $exists = DB::table('branch')
+                ->where('branch_no', $request->branch_no)
+                ->exists();
 
-        ]);
+            if ($exists) {
 
-        return redirect('/branches');
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Branch Number detected.');
+
+            }
+
+            DB::table('branch')->insert([
+
+                'branch_no' => $request->branch_no,
+                'street' => $request->street,
+                'area' => $request->area,
+                'city' => $request->city,
+                'postcode' => $request->postcode,
+                'telephone' => $request->telephone,
+                'fax' => $request->fax
+
+            ]);
+
+            return redirect('/branches')
+                ->with('success', 'Branch added successfully.');
+
+        } catch (QueryException $e) {
+
+            throw $e;
+
+        }
 
     }
 
@@ -94,7 +116,8 @@ class BranchController extends Controller
 
             ]);
 
-        return redirect('/branches');
+        return redirect('/branches')
+            ->with('success', 'Branch updated successfully.');
 
     }
 
@@ -105,7 +128,8 @@ class BranchController extends Controller
             ->where('branch_no', $id)
             ->delete();
 
-        return redirect('/branches');
+        return redirect('/branches')
+            ->with('success', 'Branch deleted successfully.');
 
     }
 

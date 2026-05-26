@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class PaymentController extends Controller
 {
@@ -37,17 +38,40 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('payment')->insert([
+        try {
 
-            'lease_no' => $request->lease_no,
-            'payment_date' => $request->payment_date,
-            'amount' => $request->amount,
-            'payment_method' => $request->payment_method,
-            'payment_status' => $request->payment_status
+            $exists = DB::table('payment')
+                ->where('lease_no', $request->lease_no)
+                ->where('payment_date', $request->payment_date)
+                ->where('amount', $request->amount)
+                ->exists();
 
-        ]);
+            if ($exists) {
 
-        return redirect('/payments');
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Payment Record detected.');
+
+            }
+
+            DB::table('payment')->insert([
+
+                'lease_no' => $request->lease_no,
+                'payment_date' => $request->payment_date,
+                'amount' => $request->amount,
+                'payment_method' => $request->payment_method,
+                'payment_status' => $request->payment_status
+
+            ]);
+
+            return redirect('/payments')
+                ->with('success', 'Payment added successfully.');
+
+        } catch (QueryException $e) {
+
+            throw $e;
+
+        }
 
     }
 
@@ -97,7 +121,8 @@ class PaymentController extends Controller
 
             ]);
 
-        return redirect('/payments');
+        return redirect('/payments')
+            ->with('success', 'Payment updated successfully.');
 
     }
 
@@ -108,7 +133,8 @@ class PaymentController extends Controller
             ->where('payment_id', $id)
             ->delete();
 
-        return redirect('/payments');
+        return redirect('/payments')
+            ->with('success', 'Payment deleted successfully.');
 
     }
 

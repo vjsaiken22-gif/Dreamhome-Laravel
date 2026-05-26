@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class InspectionController extends Controller
 {
@@ -40,16 +41,39 @@ class InspectionController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('inspection')->insert([
+        try {
 
-            'property_no' => $request->property_no,
-            'staff_no' => $request->staff_no,
-            'inspection_date' => $request->inspection_date,
-            'comments' => $request->comments
+            $exists = DB::table('inspection')
+                ->where('property_no', $request->property_no)
+                ->where('staff_no', $request->staff_no)
+                ->where('inspection_date', $request->inspection_date)
+                ->exists();
 
-        ]);
+            if ($exists) {
 
-        return redirect('/inspections');
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Inspection Record detected.');
+
+            }
+
+            DB::table('inspection')->insert([
+
+                'property_no' => $request->property_no,
+                'staff_no' => $request->staff_no,
+                'inspection_date' => $request->inspection_date,
+                'comments' => $request->comments
+
+            ]);
+
+            return redirect('/inspections')
+                ->with('success', 'Inspection added successfully.');
+
+        } catch (QueryException $e) {
+
+            throw $e;
+
+        }
 
     }
 
@@ -101,7 +125,8 @@ class InspectionController extends Controller
 
             ]);
 
-        return redirect('/inspections');
+        return redirect('/inspections')
+            ->with('success', 'Inspection updated successfully.');
 
     }
 
@@ -112,7 +137,8 @@ class InspectionController extends Controller
             ->where('inspection_id', $id)
             ->delete();
 
-        return redirect('/inspections');
+        return redirect('/inspections')
+            ->with('success', 'Inspection deleted successfully.');
 
     }
 

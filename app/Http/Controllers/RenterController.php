@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class RenterController extends Controller
 {
@@ -62,17 +63,36 @@ class RenterController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('renter')->insert([
-            'renter_no' => $request->renter_no,
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-            'address' => $request->address,
-            'telephone' => $request->telephone,
-            'preferred_type' => $request->preferred_type,
-            'max_rent' => $request->max_rent
-        ]);
+        try {
 
-        return redirect('/renters');
+            DB::table('renter')->insert([
+
+                'renter_no' => $request->renter_no,
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'telephone' => $request->telephone,
+                'preferred_type' => $request->preferred_type,
+                'max_rent' => $request->max_rent
+
+            ]);
+
+            return redirect('/renters')
+                ->with('success', 'Renter added successfully.');
+
+        } catch (QueryException $e) {
+
+            if ($e->errorInfo[1] == 1062) {
+
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Renter Number detected.');
+
+            }
+
+            throw $e;
+
+        }
 
     }
 
@@ -82,15 +102,18 @@ class RenterController extends Controller
         DB::table('renter')
             ->where('renter_no', $id)
             ->update([
+
                 'fname' => $request->fname,
                 'lname' => $request->lname,
                 'address' => $request->address,
                 'telephone' => $request->telephone,
                 'preferred_type' => $request->preferred_type,
                 'max_rent' => $request->max_rent
+
             ]);
 
-        return redirect('/renters');
+        return redirect('/renters')
+            ->with('success', 'Renter updated successfully.');
 
     }
 
@@ -101,7 +124,8 @@ class RenterController extends Controller
             ->where('renter_no', $id)
             ->delete();
 
-        return redirect('/renters');
+        return redirect('/renters')
+            ->with('success', 'Renter deleted successfully.');
 
     }
 

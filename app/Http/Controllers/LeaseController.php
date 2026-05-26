@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class LeaseController extends Controller
 {
@@ -40,21 +41,38 @@ class LeaseController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('lease')->insert([
+        try {
 
-            'lease_no' => $request->lease_no,
-            'property_no' => $request->property_no,
-            'renter_no' => $request->renter_no,
-            'staff_no' => $request->staff_no,
-            'rent' => $request->rent,
-            'deposit' => $request->deposit,
-            'payment_method' => $request->payment_method,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            DB::table('lease')->insert([
 
-        ]);
+                'lease_no' => $request->lease_no,
+                'property_no' => $request->property_no,
+                'renter_no' => $request->renter_no,
+                'staff_no' => $request->staff_no,
+                'rent' => $request->rent,
+                'deposit' => $request->deposit,
+                'payment_method' => $request->payment_method,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date
 
-        return redirect('/leases');
+            ]);
+
+            return redirect('/leases')
+                ->with('success', 'Lease added successfully.');
+
+        } catch (QueryException $e) {
+
+            if ($e->errorInfo[1] == 1062) {
+
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Lease Number detected.');
+
+            }
+
+            throw $e;
+
+        }
 
     }
 
@@ -110,7 +128,8 @@ class LeaseController extends Controller
 
             ]);
 
-        return redirect('/leases');
+        return redirect('/leases')
+            ->with('success', 'Lease updated successfully.');
 
     }
 
@@ -121,7 +140,8 @@ class LeaseController extends Controller
             ->where('lease_no', $id)
             ->delete();
 
-        return redirect('/leases');
+        return redirect('/leases')
+            ->with('success', 'Lease deleted successfully.');
 
     }
 

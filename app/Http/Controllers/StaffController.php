@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class StaffController extends Controller
 {
@@ -34,27 +35,44 @@ class StaffController extends Controller
     public function store(Request $request)
     {
 
-        DB::table('staff')->insert([
+        try {
 
-            'staff_no' => $request->staff_no,
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-            'address' => $request->address,
-            'telephone' => $request->telephone,
-            'sex' => $request->sex,
-            'dob' => $request->dob,
-            'nin' => $request->nin,
-            'position' => $request->position,
-            'salary' => $request->salary,
-            'branch_no' => $request->branch_no,
-            'date_joined' => $request->date_joined,
-            'username' => $request->username,
-            'password' => $request->password,
-            'role' => $request->role
+            DB::table('staff')->insert([
 
-        ]);
+                'staff_no' => $request->staff_no,
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'address' => $request->address,
+                'telephone' => $request->telephone,
+                'sex' => $request->sex,
+                'dob' => $request->dob,
+                'nin' => $request->nin,
+                'position' => $request->position,
+                'salary' => $request->salary,
+                'branch_no' => $request->branch_no,
+                'date_joined' => $request->date_joined,
+                'username' => $request->username,
+                'password' => $request->password,
+                'role' => $request->role
 
-        return redirect('/staff');
+            ]);
+
+            return redirect('/staff')
+                ->with('success', 'Staff added successfully.');
+
+        } catch (QueryException $e) {
+
+            if ($e->errorInfo[1] == 1062) {
+
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Duplicate Staff Number, Username, or NIN detected.');
+
+            }
+
+            throw $e;
+
+        }
 
     }
 
@@ -110,7 +128,8 @@ class StaffController extends Controller
 
             ]);
 
-        return redirect('/staff');
+        return redirect('/staff')
+            ->with('success', 'Staff updated successfully.');
 
     }
 
@@ -121,7 +140,8 @@ class StaffController extends Controller
             ->where('staff_no', $id)
             ->delete();
 
-        return redirect('/staff');
+        return redirect('/staff')
+            ->with('success', 'Staff deleted successfully.');
 
     }
 
