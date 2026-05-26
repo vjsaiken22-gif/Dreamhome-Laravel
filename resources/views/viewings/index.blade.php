@@ -44,6 +44,7 @@
                 <th>Renter No</th>
                 <th>Property No</th>
                 <th>View Date</th>
+                <th>Comments</th>
                 <th>Actions</th>
 
             </tr>
@@ -70,6 +71,10 @@
 
                 <td>
                     {{ $row->view_date }}
+                </td>
+
+                <td>
+                    {{ $row->comments }}
                 </td>
 
                 <td class="action-links">
